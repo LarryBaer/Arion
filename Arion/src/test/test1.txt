@@ -1,0 +1,17 @@
+﻿log("Welcome")
+
+if(true){
+    log("if")
+}
+
+if(5 > 2){
+    log("greater")
+}
+
+log(5 + 5)
+
+var a = 2 + 2
+log(a)
+
+var b = "yo"
+log(b)

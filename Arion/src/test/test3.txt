@@ -1,0 +1,6 @@
+﻿log(hello)
+if(false){
+    log(false)
+}elseif(3 = 3){
+    log(equals)
+}

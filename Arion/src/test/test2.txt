@@ -1,0 +1,4 @@
+﻿log(hello)
+if(true){
+    log(true)
+}
