@@ -3,9 +3,9 @@ import Tokenizer.Tokenizer
 import java.io.File
 
 fun main(args: Array<String>) {
-    if(args.size < 1){
+    if (args.size < 1) {
         throw IllegalArgumentException("ERROR: Missing or invalid file path argument.")
-        return;
+        return
     }
 
     var file = File(args[0]).readText()
@@ -20,8 +20,8 @@ fun main(args: Array<String>) {
     interpreter.interpretStatements(statementList)
 }
 
-private fun printTokenList(tokenList: List<Token>){
-    for(token in tokenList){
+private fun printTokenList(tokenList: List<Token>) {
+    for (token in tokenList) {
         println(token.tokenValue + " type: " + token.tokenType)
     }
 }

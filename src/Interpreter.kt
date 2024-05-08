@@ -1,12 +1,12 @@
 import Expression.*
 import Statement.*
 
-class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
+class Interpreter : ExpressionVisitor<String>, StatementVisitor<Void> {
     private var state = State(null)
 
     fun interpretStatements(statements: List<Statement?>) {
-        for(i in statements.indices){
-            if(statements[i] != null){
+        for (i in statements.indices) {
+            if (statements[i] != null) {
                 executeStatement(statements[i])
             }
         }
@@ -26,9 +26,9 @@ class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
         // Temporarily change the state to utilize scope
         state = sectionState
 
-        if(statementsToExecute != null){
+        if (statementsToExecute != null) {
             for (statement in statementsToExecute.indices) {
-                if(statementsToExecute[statement] != null) {
+                if (statementsToExecute[statement] != null) {
                     executeStatement(statementsToExecute[statement])
                 }
             }
@@ -51,7 +51,7 @@ class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
     override fun visitUnaryExpression(unary: Unary): String {
         val operand = evaluateExpression(unary.operand)
 
-        if(unary.operator.tokenType == "not"){
+        if (unary.operator.tokenType == "not") {
             return (!operand.toBoolean()).toString()
         }
 
@@ -87,10 +87,10 @@ class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
         val rightOperand = evaluateExpression(logical.rightOperand)
 
         if (logical.operator.tokenType === "or") {
-            if (leftOperand == "true" || rightOperand == "true"){
+            if (leftOperand == "true" || rightOperand == "true") {
                 return "true"
             }
-        } else if(logical.operator.tokenType === "and") {
+        } else if (logical.operator.tokenType === "and") {
             if (leftOperand == "true" && rightOperand == "true") {
                 return "true"
             }
@@ -123,11 +123,17 @@ class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
     override fun visitIfStatement(ifStatement: If) {
         if ((evaluateExpression(ifStatement.booleanExpression)).toBoolean()) {
             executeStatement(ifStatement.ifStatementBody)
-        }else if(ifStatement.elifStatementBody is If && evaluateExpression(ifStatement.elifStatementBody.booleanExpression).toBoolean()){
+        } else if (
+            ifStatement.elifStatementBody is If &&
+            evaluateExpression(ifStatement.elifStatementBody.booleanExpression).toBoolean()
+        ) {
             executeStatement(ifStatement.elifStatementBody)
-        }else if(ifStatement.elifStatementBody is If && ifStatement.elifStatementBody.elseStatementBody != null){
+        } else if (
+            ifStatement.elifStatementBody is If &&
+            ifStatement.elifStatementBody.elseStatementBody != null
+        ) {
             executeStatement(ifStatement.elifStatementBody.elseStatementBody)
-        }else if(ifStatement.elseStatementBody != null){
+        } else if (ifStatement.elseStatementBody != null) {
             executeStatement(ifStatement.elseStatementBody)
         }
     }
@@ -143,8 +149,8 @@ class Interpreter :  ExpressionVisitor<String>, StatementVisitor<Void> {
         }
     }
 
-    override fun visitSectionStatement(section: Section){
-        if(section.sectionBody != null){
+    override fun visitSectionStatement(section: Section) {
+        if (section.sectionBody != null) {
             executeSection(section.sectionBody, State(state))
         }
     }
