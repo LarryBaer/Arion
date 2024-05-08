@@ -1,0 +1,8 @@
+﻿var theNumber = 3
+if(false){
+	log(“This does not execute.”)
+}elif(theNumber < 5){
+	log(“The number is less than 5!”)
+}else{
+	log(“Else statement his been reached.”)
+}

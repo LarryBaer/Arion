@@ -1,0 +1,7 @@
+﻿function doMath(){
+    log(5 + 5 - 2)
+    log(((5 + 5) * 10) / 2)
+    log(26 % 6)
+}
+
+doMath()
