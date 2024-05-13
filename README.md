@@ -1,7 +1,3 @@
-<p align="center">
-<img src="./arion_logo.png"  alt="Arion logo"/>
-</p>
-
 # Arion
 
 Interpreted programming language developed and designed completely in Kotlin!
